@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3D stl objects →> world Wireframe converter by Leelove v0.1</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <noscript>
+    <div style="background:#fee2e2;color:#991b1b;border:1px solid #fecaca;padding:12px 16px;margin:12px;border-radius:8px;font:14px system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;">
+      <strong>JavaScript required:</strong> this converter runs entirely in your browser. With JavaScript disabled, parsing and conversion will not work.
+    </div>
+  </noscript>
+  <div class="main-container">
+    <aside class="controls-panel">
+      <header>
+        <h1>STL to Wireframe</h1>
+        <div class="status" id="status">Ready.</div>
+      </header>
+
+      <div class="card">
+        <h2>1. Load STL</h2>
+        <input type="file" id="stlFile" accept=".stl">
+        <button id="btnLoad">Parse</button>
+      </div>
+
+      <div class="card">
+        <h2>2. Parameters</h2>
+        <div class="form-grid">
+          <label for="radius">Cylinder Radius</label><input type="number" id="radius" value="0.5" step="0.01">
+          <label for="scale">Scale</label><input type="number" id="scale" value="2.0" step="0.1">
+          <label for="colorPicker">Color</label><input type="color" id="colorPicker" value="#ff0000">
+          <label for="material">Material</label><input type="text" id="material" value="metal_4">
+          <label for="eps">Dedup ε</label><input type="number" id="eps" value="1e-05" step="1e-6" min="0">
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Tips</h2>
+        <p><strong>Set the model size during conversion (Scale parameter).</strong> The game won't scale it nicely by itself. For small decor objects you can use a very low scale like <code>0.06</code>.</p>
+        <p><strong>Cylinder Radius depends on your Scale.</strong> If you increase the model <em>Scale</em>, increase <em>Cylinder Radius</em> to keep wires visually proportional; if you decrease <em>Scale</em>, reduce the radius so wires don't look too thick.</p>
+        <p><em>Good starting point:</em> try <strong>Scale = 2</strong> and <strong>Cylinder Radius = 0.5</strong>, then adjust to taste.</p>
+        <p>Low‑poly is <em>not</em> mandatory, but heavy objects won't load nicely in the game. Aim for an exported <code>.world</code> under <strong>500&nbsp;KB</strong>.</p>
+        <p>To reduce complexity in Blender (optional):</p>
+        <ol>
+          <li>File → Import → STL</li>
+          <li>Select the mesh → Modifiers → Add Modifier → Decimate</li>
+          <li>Adjust Ratio (e.g. 0.1–0.5) to reduce triangles → Apply</li>
+          <li>File → Export → STL</li>
+        </ol>
+        <p>See the <a href="guide.html" target="_blank" rel="noreferrer">illustrated guide</a> or download the <a href="guide.pdf" target="_blank">PDF version</a> for screenshots.</p>
+      </div>
+
+      <div class="card">
+        <h2>3. Convert & Save</h2>
+        <div class="actions">
+          <button id="btnConvert">Convert to .world</button>
+          <button id="btnSave" disabled>Save .world</button>
+        </div>
+      </div>
+
+      <footer>
+        <div class="license">License: <strong>CC BY‑NC</strong>. Any derivative work must cite the author: <strong>Leelove</strong>. Pro builder licence is CC BY but with a significant > 20 euros Amazon gift card required</div>
+      </footer>
+    </aside>
+
+    <main class="viewer-panel">
+      <canvas id="previewCanvas"></canvas>
+      <div class="viewer-controls">
+        <button id="btnFit">Fit View</button>
+      </div>
+    </main>
+  </div>
+
+  <!-- Legacy global THREE for portability (no modules). Pin to r149. -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.149.0/build/three.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

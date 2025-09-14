@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>3D objects in stl format → .world Wireframe Converter — Illustrated Guide</title>
+  <style>
+    :root { --fg:#111; --muted:#555; --acc:#0a84ff; }
+    html,body{margin:0;padding:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--fg);}
+    .wrap{max-width:900px;margin:24px auto;padding:0 16px;}
+    header h1{margin:0 0 6px 0}
+    header p{margin:0 0 16px 0;color:var(--muted)}
+    h2{margin-top:24px}
+    .tip{background:#f6f8fa;border:1px solid #e5e7eb;border-radius:8px;padding:12px}
+    figure{margin:16px 0}
+    figure img{max-width:100%;border:1px solid #e5e7eb;border-radius:6px}
+    figure figcaption{font-size:0.9rem;color:var(--muted);margin-top:4px}
+    ol,ul{padding-left:20px}
+    @media print{a[href]:after{content:""}}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <h1>3D objects in STL format → .world Wireframe Converter guide</h1>
+      <p>By Leelove with illustrated steps:</p>
+      <div class="tip"><strong>JavaScript required:</strong> The converter runs entirely in your browser. If JavaScript is disabled, parsing and conversion won't work. Example STL files are included in the <code>stls/</code> directory so you can test quickly.</div>
+    </header>
+
+    <section>
+      <figure>
+        <img src="assets/woodcat.webp" alt="Showcase example: woodcat wireframe" />
+      </figure>
+      <figure>
+        <img src="assets/love.webp" alt="Showcase example: love sculpture wireframe" />
+      </figure>
+    </section>
+
+    <section>
+      <h2>1. What this tool does</h2>
+      <p>This web tool loads an STL mesh in your browser and converts its triangle edges into cylinder-based wireframes, exporting a compact <code>.world</code> file. Use the preview to adjust parameters before saving.</p>
+      <div class="tip"><strong>Important:</strong> Set the <em>Scale</em> during conversion (the game won't scale it nicely by itself). For small decor objects you can use a very low scale like <code>0.06</code>. Low‑poly is <em>not</em> mandatory, but heavy objects won't load nicely — aim for an exported <code>.world</code> under <strong>500&nbsp;KB</strong>.</div>
+    </section>
+
+    <section>
+      <h2>2. Using the web UI</h2>
+      <ol>
+        <li>Open <code>index.html</code> in your browser.</li>
+        <li>Load your STL and click <em>Parse</em>.</li>
+        <li>Set <em>Cylinder Radius</em>, <em>Scale</em>, <em>Color</em>, <em>Material</em>, and <em>Dedup ε</em>.</li>
+        <li>Click <em>Convert to .world</em>, then <em>Save .world</em>.</li>
+      </ol>
+      <figure>
+        <img src="assets/womanui.webp" alt="Web UI preview" />
+        <figcaption>Preview and parameters panel.</figcaption>
+      </figure>
+    </section>
+
+    <section>
+      <h2>3. Make your STL low‑poly in Blender</h2>
+      <ol>
+        <li>Blender → File → Import → STL</li>
+        <li>Select mesh → Modifiers → Add Modifier → <strong>Decimate</strong></li>
+        <li>Lower <em>Ratio</em> (e.g. 0.1–0.5) until topology is simplified but shape remains</li>
+        <li>Apply → File → Export → STL</li>
+      </ol>
+      <figure>
+        <img src="assets/womanstl.png" alt="Original STL before decimation" />
+        <figcaption>Original STL before decimation. Reducing triangles will improve clarity and performance.</figcaption>
+      </figure>
+      <div class="tip"><strong>Video tutorial:</strong> Watch this <a href="https://www.youtube.com/watch?v=xqRLnqinZNU" target="_blank">YouTube video</a> for a step-by-step guide on making STL files low-poly in Blender.</div>
+    </section>
+
+    <section>
+      <h2>4. Example result</h2>
+      <figure>
+        <img src="assets/womanresult.webp" alt="Resulting wireframe after conversion" />
+        <figcaption>Resulting wireframe after conversion.</figcaption>
+      </figure>
+    </section>
+
+
+    <section>
+      <h2>Introduction to 3D</h2>
+      <p>Welcome in the real 3D world</p>
+      <p>The point of this tool, is to open a giga world to 3DX builders. You can :</p>
+      <ul>
+        <li>find for free on internet ready made 3d objects for what you want :</li>
+        <li><a href="https://cults3d.com/en/profile/created">https://cults3d.com/en/profile/created</a>  (search 'free')</li>
+        <li><a href="https://www.thingiverse.com/">https://www.thingiverse.com/</a></li>
+        <li>learn how to make your own 3d objects, there is countless YT videos for this.</li>
+        <li>learn a bit blender as explained in the guide to be able to downsample objects as the game doesn't like big files.</li>
+        <li>convert a 2D image in a 3D object via AI for any object you want (again a lot of sites possible) like with <a href="https://3dserver.hitem3d.ai/">https://3dserver.hitem3d.ai/</a></li>
+        </ul>
+      <p>Stl files are the common files for 3D printers so countless stl files are available on internet for free. There is countless 3D objects file formats but at the end to use this tool you need to convert it to stl.</p>
+      <p>Its very easy with countless 3D fileformat online converters. i will recommand to learn how to import and export 3D objects in blender (free and open source) so u can downsample objects as the game doesn't like big files.</p>
+      <figure>
+        <img src="assets/2d23d.webp" alt="2d to 3d conversion example" />
+        <figcaption>2d to 3d conversion example.</figcaption>
+      </figure>
+      <h2>Really crazy thing...</h2>
+      <p>The really crazy thing is that if you know how to code or vibe code this js code and the python version has all necessary maths to do anything in .world. like generating a minecraft world.</p>
+      <figure>
+        <img src="assets/mncft.webp" alt="Minecraft world generation example" />
+        <figcaption>Minecraft world generation example.</figcaption>
+      </figure>
+      <p>Everything is made with a cube.</p>
+      <p>Remember to check if your AI always use decimal numbers and not rounded numbers.</p>
+    </section>
+
+
+
+  <section>
+    <h2>License</h2>
+    <p><b>CC BY‑NC</b>. Any derivative work must cite the author: <b>Leelove</b>. Pro builder licence is CC BY with a required significant > 20 euros Amazon gift card required</p>
+  </section>
+</div>
+</body>
+
+</html>
